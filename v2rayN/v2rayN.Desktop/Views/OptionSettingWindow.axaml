@@ -602,7 +602,7 @@
                             Margin="{StaticResource Margin4}"
                             VerticalAlignment="Center"
                             Text="{x:Static resx:ResUI.TbSettingsGeoFilesSource}" />
-                        <ComboBox
+                        <ctrls:AutoCompleteBox
                             x:Name="cmbGetFilesSourceUrl"
                             Grid.Row="22"
                             Grid.Column="1"
@@ -622,7 +622,7 @@
                             Margin="{StaticResource Margin4}"
                             VerticalAlignment="Center"
                             Text="{x:Static resx:ResUI.TbSettingsSrsFilesSource}" />
-                        <ComboBox
+                        <ctrls:AutoCompleteBox
                             x:Name="cmbSrsFilesSourceUrl"
                             Grid.Row="23"
                             Grid.Column="1"
@@ -642,7 +642,7 @@
                             Margin="{StaticResource Margin4}"
                             VerticalAlignment="Center"
                             Text="{x:Static resx:ResUI.TbSettingsRoutingRulesSource}" />
-                        <ComboBox
+                        <ctrls:AutoCompleteBox
                             x:Name="cmbRoutingRulesSourceUrl"
                             Grid.Row="24"
                             Grid.Column="1"
@@ -662,7 +662,7 @@
                             Margin="{StaticResource Margin4}"
                             VerticalAlignment="Center"
                             Text="{x:Static resx:ResUI.TbSettingsIPAPIUrl}" />
-                        <ComboBox
+                        <ctrls:AutoCompleteBox
                             x:Name="cmbIPAPIUrl"
                             Grid.Row="25"
                             Grid.Column="1"

@@ -18,6 +18,15 @@
                         InnerLeftContent="{TemplateBinding InnerLeftContent}"
                         InnerRightContent="{TemplateBinding InnerRightContent}"
                         Watermark="{TemplateBinding Watermark}" />
+                    <PathIcon
+                        Name="PART_DropDownButton"
+                        Grid.Column="1"
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Theme="{DynamicResource InnerPathIcon}"
+                        Foreground="{DynamicResource ComboBoxIconDefaultForeground}"
+                        Data="{DynamicResource ComboBoxIcon}" />
                     <Popup
                         Name="PART_Popup"
                         MaxHeight="{TemplateBinding MaxDropDownHeight}"

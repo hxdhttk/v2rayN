@@ -80,22 +80,10 @@ public partial class OptionSettingWindow : ReactiveWindow<OptionSettingViewModel
         cmbSpeedPingTestUrl.ItemsSource = Global.SpeedPingTestUrls;
         cmbSubConvertUrl.ItemsSource = Global.SubConvertUrls;
 
-        Global.GeoFilesSources.ForEach(it =>
-        {
-            cmbGetFilesSourceUrl.Items.Add(it);
-        });
-        Global.SingboxRulesetSources.ForEach(it =>
-        {
-            cmbSrsFilesSourceUrl.Items.Add(it);
-        });
-        Global.RoutingRulesSources.ForEach(it =>
-        {
-            cmbRoutingRulesSourceUrl.Items.Add(it);
-        });
-        Global.IPAPIUrls.ForEach(it =>
-        {
-            cmbIPAPIUrl.Items.Add(it);
-        });
+        cmbGetFilesSourceUrl.ItemsSource = Global.GeoFilesSources;
+        cmbSrsFilesSourceUrl.ItemsSource = Global.SingboxRulesetSources;
+        cmbRoutingRulesSourceUrl.ItemsSource = Global.RoutingRulesSources;
+        cmbIPAPIUrl.ItemsSource = Global.IPAPIUrls;
         foreach (EGirdOrientation it in Enum.GetValues(typeof(EGirdOrientation)))
         {
             cmbMainGirdOrientation.Items.Add(it.ToString());
@@ -144,10 +132,10 @@ public partial class OptionSettingWindow : ReactiveWindow<OptionSettingViewModel
             this.Bind(ViewModel, vm => vm.MixedConcurrencyCount, v => v.cmbMixedConcurrencyCount.SelectedValue).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SubConvertUrl, v => v.cmbSubConvertUrl.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MainGirdOrientation, v => v.cmbMainGirdOrientation.SelectedIndex).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.GeoFileSourceUrl, v => v.cmbGetFilesSourceUrl.SelectedValue).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.SrsFileSourceUrl, v => v.cmbSrsFilesSourceUrl.SelectedValue).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.RoutingRulesSourceUrl, v => v.cmbRoutingRulesSourceUrl.SelectedValue).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.IPAPIUrl, v => v.cmbIPAPIUrl.SelectedValue).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.GeoFileSourceUrl, v => v.cmbGetFilesSourceUrl.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.SrsFileSourceUrl, v => v.cmbSrsFilesSourceUrl.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.RoutingRulesSourceUrl, v => v.cmbRoutingRulesSourceUrl.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.IPAPIUrl, v => v.cmbIPAPIUrl.Text).DisposeWith(disposables);
 
             this.Bind(ViewModel, vm => vm.notProxyLocalAddress, v => v.tognotProxyLocalAddress.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.systemProxyAdvancedProtocol, v => v.cmbsystemProxyAdvancedProtocol.SelectedValue).DisposeWith(disposables);

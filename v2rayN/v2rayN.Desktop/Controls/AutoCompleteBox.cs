@@ -1,10 +1,36 @@
+using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 
 namespace v2rayN.Desktop.Controls;
 
+[TemplatePart(ElementDropDownButton, typeof(PathIcon))]
 public class AutoCompleteBox : Avalonia.Controls.AutoCompleteBox
 {
+    private const string ElementDropDownButton = "PART_DropDownButton";
+
+    private PathIcon? _dropDownButton;
+
+    public PathIcon? DropDownButton
+    {
+        get => _dropDownButton;
+        set
+        {
+            if (_dropDownButton != null)
+            {
+                _dropDownButton.Tapped -= OnDropDownButtonTapped;
+            }
+
+            _dropDownButton = value;
+
+            if (_dropDownButton != null)
+            {
+                _dropDownButton.Tapped += OnDropDownButtonTapped;
+            }
+        }
+    }
+
     static AutoCompleteBox()
     {
         MinimumPrefixLengthProperty.OverrideDefaultValue<AutoCompleteBox>(0);
@@ -12,25 +38,26 @@ public class AutoCompleteBox : Avalonia.Controls.AutoCompleteBox
 
     public AutoCompleteBox()
     {
-        AddHandler(PointerPressedEvent, OnBoxPointerPressed, RoutingStrategies.Tunnel);
+        SetCurrentValue(FilterModeProperty, AutoCompleteFilterMode.None);
     }
 
-    private void OnBoxPointerPressed(object? sender, PointerPressedEventArgs e)
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        if (Equals(sender, this) && e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+
+        if (e.NameScope.Find<PathIcon>(ElementDropDownButton) is PathIcon button)
         {
-            SetCurrentValue(IsDropDownOpenProperty, true);
+            DropDownButton = button;
         }
+
+        base.OnApplyTemplate(e);
     }
 
-    protected override void OnGotFocus(GotFocusEventArgs e)
+    private void OnDropDownButtonTapped(object? sender, TappedEventArgs e)
     {
-        base.OnGotFocus(e);
-        if (IsDropDownOpen)
+        if (sender is PathIcon button && Equals(button, DropDownButton))
         {
-            return;
+            SetCurrentValue(IsDropDownOpenProperty, !IsDropDownOpen);
         }
-        SetCurrentValue(IsDropDownOpenProperty, true);
     }
 
     public void Clear()
